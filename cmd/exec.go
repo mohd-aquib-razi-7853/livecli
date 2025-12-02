@@ -98,7 +98,8 @@ func executeCommand(command string) {
 	}
 	
 	green.Println("\n✓ Command completed successfully")
-	cyan.Println("─────────────────────────────────────────────────────────────\n")
+	cyan.Println("─────────────────────────────────────────────────────────────")
+	fmt.Println()
 }
 
 func streamOutput(reader io.Reader, isError bool) {

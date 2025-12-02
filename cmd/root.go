@@ -43,15 +43,19 @@ func displayWelcome() {
 	
 	fmt.Println("\nAvailable Commands:")
 	yellow.Println("  livecli exec <command>    - Execute system commands")
+	yellow.Println("  livecli setup <task>      - AI-powered setup assistant (NEW!)")
 	yellow.Println("  livecli chat              - Start AI chat session")
 	yellow.Println("  livecli interactive       - Interactive mode (exec + chat)")
 	yellow.Println("  livecli ask <question>    - Quick AI question")
 	
 	fmt.Println("\nExamples:")
 	fmt.Println("  livecli exec \"ls -la\"")
+	fmt.Println("  livecli setup \"rust into my system\"")
+	fmt.Println("  livecli setup \"vscode editor\"")
 	fmt.Println("  livecli chat")
 	fmt.Println("  livecli ask \"How do I list all running processes?\"")
 	fmt.Println("  livecli interactive")
 	
-	fmt.Println("\nUse 'livecli <command> --help' for more information about a command.\n")
+	fmt.Println("\nUse 'livecli <command> --help' for more information about a command.")
+	fmt.Println()
 }

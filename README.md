@@ -4,6 +4,7 @@ A powerful AI-powered command-line interface that combines system command execut
 
 ## Features ✨
 
+- **🤖 AI-Powered Setup**: Intelligent installation assistant - just describe what you want to install! (NEW!)
 - **Command Execution**: Execute system commands with real-time output streaming
 - **AI Chat**: Interactive chat sessions with AI assistant
 - **Quick Questions**: Ask one-off questions without starting a full chat session
@@ -43,16 +44,19 @@ sudo mv livecli /usr/local/bin/
 You can set your API key in three ways:
 
 1. **Environment Variable** (recommended):
+
 ```bash
 export OPENAI_API_KEY="your-api-key-here"
 ```
 
 2. **Command-line Flag**:
+
 ```bash
 livecli chat --api-key="your-api-key-here"
 ```
 
 3. **.env File**:
+
 ```bash
 cp .env.example .env
 # Edit .env and add your API key
@@ -80,6 +84,65 @@ livecli exec --shell bash "echo Hello World"
 livecli exec --dir /tmp "pwd"
 ```
 
+### AI-Powered Setup Assistant 🤖 (NEW!)
+
+Let AI figure out and execute installation commands for you!
+
+```bash
+# Install software with AI assistance
+livecli setup "rust into my system"
+livecli setup "vscode editor"
+livecli setup "docker and docker-compose"
+livecli setup "nodejs version 18"
+
+# Auto-confirm all steps
+livecli setup "python3 and pip" --yes
+
+# Preview commands without executing
+livecli setup "postgresql database" --dry-run
+```
+
+**How it works**:
+
+1. Describe what you want to install
+2. AI generates step-by-step installation commands
+3. Each command is explained and shown to you
+4. You confirm before execution
+5. Commands execute one by one
+
+**Example**:
+
+```bash
+$ livecli setup "rust into my system"
+
+╔═══════════════════════════════════════════════════════════╗
+║           🤖 AI Setup Assistant                           ║
+╚═══════════════════════════════════════════════════════════╝
+
+📋 Task: rust into my system
+
+⏳ Analyzing your request and generating setup plan...
+
+📝 Setup Plan:
+─────────────────────────────────────────────────────────────
+
+1. Install Rust using rustup
+   Command: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+
+2. Source cargo environment
+   Command: source $HOME/.cargo/env
+
+3. Verify Rust installation
+   Command: rustc --version
+
+❓ Do you want to proceed with this setup plan? (yes/no): yes
+
+🚀 Starting setup process...
+[Executes each command with confirmation]
+```
+
+See `SETUP_GUIDE.md` for more examples!
+
 ### AI Chat Session
 
 ```bash
@@ -94,6 +157,7 @@ livecli chat --temperature 0.9 --max-tokens 2000
 ```
 
 **Chat Commands**:
+
 - Type your message and press Enter
 - `/clear` - Clear conversation history
 - `/exit` or `/quit` - Exit chat session
@@ -120,6 +184,7 @@ livecli interactive
 ```
 
 **Interactive Mode Commands**:
+
 - `/exec <command>` - Execute a system command
 - `@ask <question>` - Ask AI a quick question
 - `<message>` - Chat with AI (maintains conversation history)
@@ -127,6 +192,7 @@ livecli interactive
 - `/exit` - Exit interactive mode
 
 **Examples**:
+
 ```
 > /exec ls -la
 > @ask How do I find large files?
@@ -230,8 +296,20 @@ livecli exec [flags] <command>
 ```
 
 **Flags**:
+
 - `--shell, -s`: Shell to use (default: sh on Unix, cmd on Windows)
 - `--dir, -d`: Working directory (default: current directory)
+
+### setup Command
+
+```bash
+livecli setup [flags] <task description>
+```
+
+**Flags**:
+
+- `--yes, -y`: Auto-confirm all commands
+- `--dry-run`: Show commands without executing
 
 ### chat Command
 
@@ -240,6 +318,7 @@ livecli chat [flags]
 ```
 
 **Flags**:
+
 - `--system, -s`: System prompt for AI
 - `--max-tokens, -t`: Maximum tokens in response (default: 1000)
 - `--temperature, -T`: Temperature for AI responses (default: 0.7)
@@ -268,6 +347,7 @@ livecli/
 ├── cmd/                 # Command implementations
 │   ├── root.go         # Root command and CLI setup
 │   ├── exec.go         # Command execution
+│   ├── setup.go        # AI-powered setup assistant (NEW!)
 │   ├── chat.go         # AI chat session
 │   ├── ask.go          # Quick questions
 │   └── interactive.go  # Interactive mode
@@ -317,6 +397,7 @@ MIT License - feel free to use this project for any purpose.
 ## Support 💬
 
 If you have questions or need help:
+
 1. Check the [Examples](#examples-) section
 2. Open an issue on GitHub
 3. Read the command help: `livecli <command> --help`
