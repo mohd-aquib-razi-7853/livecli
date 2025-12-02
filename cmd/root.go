@@ -43,7 +43,8 @@ func displayWelcome() {
 	
 	fmt.Println("\nAvailable Commands:")
 	yellow.Println("  livecli exec <command>    - Execute system commands")
-	yellow.Println("  livecli setup <task>      - AI-powered setup assistant (NEW!)")
+	yellow.Println("  livecli setup <task>      - AI-powered setup assistant")
+	yellow.Println("  livecli git <message>     - Automate git add, commit, push (NEW!)")
 	yellow.Println("  livecli chat              - Start AI chat session")
 	yellow.Println("  livecli interactive       - Interactive mode (exec + chat)")
 	yellow.Println("  livecli ask <question>    - Quick AI question")

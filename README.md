@@ -4,7 +4,8 @@ A powerful AI-powered command-line interface that combines system command execut
 
 ## Features ✨
 
-- **🤖 AI-Powered Setup**: Intelligent installation assistant - just describe what you want to install! (NEW!)
+- **🤖 AI-Powered Setup**: Intelligent installation assistant - just describe what you want to install!
+- **🚀 Git Automation**: One command to add, commit, and push your changes (NEW!)
 - **Command Execution**: Execute system commands with real-time output streaming
 - **AI Chat**: Interactive chat sessions with AI assistant
 - **Quick Questions**: Ask one-off questions without starting a full chat session
@@ -142,6 +143,26 @@ $ livecli setup "rust into my system"
 ```
 
 See `SETUP_GUIDE.md` for more examples!
+
+### Git Workflow Automation 🚀 (NEW!)
+
+Streamline your git workflow with a single command!
+
+```bash
+# Stage, commit, and push in one go
+livecli git "feat: add new login page"
+
+# Auto-confirm (great for scripts)
+livecli git "fix: typo in readme" --yes
+```
+
+**What it does**:
+
+1. `git add .` (Stages all changes)
+2. `git commit -m "message"` (Commits with your message)
+3. `git push` (Pushes to current branch)
+
+**Safety**: It shows you the plan and asks for confirmation before running!
 
 ### AI Chat Session
 
@@ -311,6 +332,16 @@ livecli setup [flags] <task description>
 - `--yes, -y`: Auto-confirm all commands
 - `--dry-run`: Show commands without executing
 
+### git Command
+
+```bash
+livecli git [flags] <message>
+```
+
+**Flags**:
+
+- `--yes, -y`: Auto-confirm all actions
+
 ### chat Command
 
 ```bash
@@ -347,7 +378,8 @@ livecli/
 ├── cmd/                 # Command implementations
 │   ├── root.go         # Root command and CLI setup
 │   ├── exec.go         # Command execution
-│   ├── setup.go        # AI-powered setup assistant (NEW!)
+│   ├── setup.go        # AI-powered setup assistant
+│   ├── git.go          # Git workflow automation (NEW!)
 │   ├── chat.go         # AI chat session
 │   ├── ask.go          # Quick questions
 │   └── interactive.go  # Interactive mode
