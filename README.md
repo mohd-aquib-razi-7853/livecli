@@ -71,20 +71,20 @@ make install
 
 - **For pre-built binaries**: None! Just download and run
 - **For building from source**: Go 1.21 or higher
-- **For all users**: OpenAI API key ([Get one here](https://platform.openai.com/api-keys))
+- **For all users**: Google Gemini API key ([Get one here](https://makersuite.google.com/app/apikey))
 
 📖 **Detailed installation instructions**: See [INSTALL.md](INSTALL.md) for platform-specific guides and troubleshooting.
 
 ## Configuration ⚙️
 
-### Set your OpenAI API Key
+### Set your Gemini API Key
 
 You can set your API key in three ways:
 
 1. **Environment Variable** (recommended):
 
 ```bash
-export OPENAI_API_KEY="your-api-key-here"
+export GEMINI_API_KEY="your-api-key-here"
 ```
 
 2. **Command-line Flag**:
@@ -208,7 +208,7 @@ livecli git "fix: typo in readme" --yes
 livecli chat
 
 # Use custom model
-livecli chat --model gpt-4
+livecli chat --model gemini-1.5-pro
 
 # Adjust temperature and max tokens
 livecli chat --temperature 0.9 --max-tokens 2000
@@ -285,7 +285,7 @@ $ livecli chat
 ╚═══════════════════════════════════════════════════════════╝
 
 Commands: /clear (clear history), /exit or Ctrl+C (quit)
-Model: gpt-3.5-turbo
+Model: gemini-1.5-flash
 
 You> How do I find all files larger than 100MB?
 
@@ -344,8 +344,8 @@ AI> Of course! Here are more advanced techniques:
 
 ### Global Flags
 
-- `--api-key`: OpenAI API key
-- `--model, -m`: AI model to use (default: gpt-3.5-turbo)
+- `--api-key`: Gemini API key
+- `--model, -m`: AI model to use (default: gemini-1.5-flash)
 
 ### exec Command
 
@@ -451,7 +451,7 @@ go test -cover ./...
 ## Technologies Used 🔧
 
 - **[Cobra](https://github.com/spf13/cobra)**: CLI framework
-- **[go-openai](https://github.com/sashabaranov/go-openai)**: OpenAI API client
+- **[generative-ai-go](https://github.com/google/generative-ai-go)**: Google Gemini API client
 - **[color](https://github.com/fatih/color)**: Colorized terminal output
 - **[readline](https://github.com/chzyer/readline)**: Interactive input with history
 
@@ -475,7 +475,7 @@ If you have questions or need help:
 
 - [ ] Add command suggestions based on AI analysis
 - [ ] Save conversation history to file
-- [ ] Support for multiple AI providers (Anthropic, etc.)
+- [x] Support for multiple AI providers (Gemini)
 - [ ] Plugin system for custom commands
 - [ ] Auto-completion for commands
 - [ ] Web UI for chat interface
