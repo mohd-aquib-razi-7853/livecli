@@ -19,33 +19,7 @@ A powerful AI-powered command-line interface that combines system command execut
 [![Platforms](https://img.shields.io/badge/platforms-Linux%20%7C%20macOS%20%7C%20Windows-blue)](https://github.com/mohd-aquib-razi-7853/livecli)
 [![Architectures](https://img.shields.io/badge/architectures-amd64%20%7C%20arm64-green)](https://github.com/mohd-aquib-razi-7853/livecli)
 
-LiveCLI supports **Linux**, **macOS**, and **Windows** on both **x86_64** and **ARM64** architectures.
-
-### Quick Install
-
-#### Linux & macOS
-
-```bash
-# Using installation script
-curl -fsSL https://raw.github.com/mohd-aquib-razi-7853/livecli/main/install.sh | bash
-```
-
-#### Windows
-
-```powershell
-# Using PowerShell (run as Administrator recommended)
-iwr -useb https://raw.github.com/mohd-aquib-razi-7853/livecli/main/install.ps1 | iex
-```
-
-### Download Pre-built Binaries
-
-Download the latest release for your platform from [Releases](https://github.com/mohd-aquib-razi-7853/livecli/releases):
-
-- **Linux**: `livecli-linux-amd64`, `livecli-linux-arm64`
-- **macOS**: `livecli-darwin-amd64` (Intel), `livecli-darwin-arm64` (Apple Silicon)
-- **Windows**: `livecli-windows-amd64.exe`, `livecli-windows-arm64.exe`
-
-### Build from Source
+### Steps
 
 ```bash
 # Clone the repository
@@ -58,23 +32,18 @@ go mod download
 # Build for current platform
 go build
 
-# OR build for all platforms (Linux, macOS, Windows - amd64 & arm64)
-go build-all
-
 # Install globally (Linux/macOS)
 go install
 
-# Windows: move binary to a directory in your PATH
-copy build\livecli-windows-amd64.exe %LOCALAPPDATA%\Programs\livecli\livecli.exe
+# Execute 
+livecli
 ```
 
 ### Prerequisites
 
-- **For pre-built binaries**: None! Just download and run
-- **For building from source**: Go 1.21 or higher
+- **For building from source**: Go 1.21 or higher (https://go.dev/doc/install)
 - **For all users**: Google Gemini API key ([Get one here](https://makersuite.google.com/app/apikey))
 
-📖 **Detailed installation instructions**: See [INSTALL.md](INSTALL.md) for platform-specific guides and troubleshooting.
 
 ## Configuration ⚙️
 
