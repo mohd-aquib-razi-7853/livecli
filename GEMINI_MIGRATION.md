@@ -25,14 +25,14 @@ December 3, 2025
 ### 3. Default AI Model
 
 - **Old**: `gpt-4o-mini`
-- **New**: `gemini-1.5-flash`
+- **New**: `gemini-2.5-flash`
 
 ### 4. Code Changes
 
 #### cmd/root.go
 
 - Updated API key environment variable from `OPENAI_API_KEY` to `GEMINI_API_KEY`
-- Changed default model from `gpt-4o-mini` to `gemini-1.5-flash`
+- Changed default model from `gpt-4o-mini` to `gemini-2.5-flash`
 
 #### cmd/chat.go
 
@@ -106,7 +106,7 @@ December 3, 2025
 
 Users can now use the following Gemini models:
 
-- `gemini-1.5-flash` (default) - Fast and efficient
+- `gemini-2.5-flash` (default) - Fast and efficient
 - `gemini-1.5-pro` - More capable, slower
 - `gemini-1.0-pro` - Previous generation
 

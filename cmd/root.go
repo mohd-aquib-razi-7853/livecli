@@ -30,7 +30,7 @@ func Execute() error {
 func init() {
 	// Global flags
 	rootCmd.PersistentFlags().StringVar(&apiKey, "api-key", os.Getenv("GEMINI_API_KEY"), "Gemini API key (or set GEMINI_API_KEY env var)")
-	rootCmd.PersistentFlags().StringVarP(&model, "model", "m", "gemini-1.5-flash", "AI model to use")
+	rootCmd.PersistentFlags().StringVarP(&model, "model", "m", "gemini-2.5-flash", "AI model to use")
 }
 
 func displayWelcome() {

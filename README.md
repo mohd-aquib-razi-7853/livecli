@@ -285,7 +285,7 @@ $ livecli chat
 ╚═══════════════════════════════════════════════════════════╝
 
 Commands: /clear (clear history), /exit or Ctrl+C (quit)
-Model: gemini-1.5-flash
+Model: gemini-2.5-flash
 
 You> How do I find all files larger than 100MB?
 
@@ -345,7 +345,7 @@ AI> Of course! Here are more advanced techniques:
 ### Global Flags
 
 - `--api-key`: Gemini API key
-- `--model, -m`: AI model to use (default: gemini-1.5-flash)
+- `--model, -m`: AI model to use (default: gemini-2.5-flash)
 
 ### exec Command
 
