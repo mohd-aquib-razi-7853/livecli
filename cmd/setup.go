@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+	"runtime"
 	"strings"
 
 	"github.com/fatih/color"
@@ -264,27 +265,34 @@ Example for "install docker":
 }
 
 func detectOS() string {
-	// Try to read /etc/os-release
-	data, err := os.ReadFile("/etc/os-release")
-	if err == nil {
-		content := string(data)
-		if strings.Contains(content, "Ubuntu") {
-			return "Ubuntu Linux (apt)"
+	switch runtime.GOOS {
+	case "windows":
+		return "Windows"
+	case "darwin":
+		return "macOS"
+	case "linux":
+		// Try to read /etc/os-release for more specific Linux distro info
+		data, err := os.ReadFile("/etc/os-release")
+		if err == nil {
+			content := string(data)
+			if strings.Contains(content, "Ubuntu") {
+				return "Ubuntu Linux (apt)"
+			}
+			if strings.Contains(content, "Debian") {
+				return "Debian Linux (apt)"
+			}
+			if strings.Contains(content, "Fedora") {
+				return "Fedora Linux (dnf)"
+			}
+			if strings.Contains(content, "CentOS") || strings.Contains(content, "Red Hat") {
+				return "CentOS/RHEL (yum/dnf)"
+			}
+			if strings.Contains(content, "Arch") {
+				return "Arch Linux (pacman)"
+			}
 		}
-		if strings.Contains(content, "Debian") {
-			return "Debian Linux (apt)"
-		}
-		if strings.Contains(content, "Fedora") {
-			return "Fedora Linux (dnf)"
-		}
-		if strings.Contains(content, "CentOS") || strings.Contains(content, "Red Hat") {
-			return "CentOS/RHEL (yum/dnf)"
-		}
-		if strings.Contains(content, "Arch") {
-			return "Arch Linux (pacman)"
-		}
+		return "Linux (generic)"
+	default:
+		return fmt.Sprintf("%s (generic)", runtime.GOOS)
 	}
-	
-	// Fallback to runtime.GOOS
-	return "Linux (generic)"
 }

@@ -30,7 +30,7 @@ func Execute() error {
 func init() {
 	// Global flags
 	rootCmd.PersistentFlags().StringVar(&apiKey, "api-key", os.Getenv("OPENAI_API_KEY"), "OpenAI API key (or set OPENAI_API_KEY env var)")
-	rootCmd.PersistentFlags().StringVarP(&model, "model", "m", "gpt-3.5-turbo", "AI model to use")
+	rootCmd.PersistentFlags().StringVarP(&model, "model", "m", "gpt-4o-mini", "AI model to use")
 }
 
 func displayWelcome() {
