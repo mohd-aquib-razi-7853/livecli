@@ -27,14 +27,14 @@ LiveCLI supports **Linux**, **macOS**, and **Windows** on both **x86_64** and **
 
 ```bash
 # Using installation script
-curl -fsSL https://raw.githubusercontent.com/mohd-aquib-razi-7853/livecli/main/install.sh | bash
+curl -fsSL https://raw.github.com/mohd-aquib-razi-7853/livecli/main/install.sh | bash
 ```
 
 #### Windows
 
 ```powershell
 # Using PowerShell (run as Administrator recommended)
-iwr -useb https://raw.githubusercontent.com/mohd-aquib-razi-7853/livecli/main/install.ps1 | iex
+iwr -useb https://raw.github.com/mohd-aquib-razi-7853/livecli/main/install.ps1 | iex
 ```
 
 ### Download Pre-built Binaries
