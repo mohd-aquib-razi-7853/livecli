@@ -16,8 +16,8 @@ A powerful AI-powered command-line interface that combines system command execut
 
 ## Installation 📦
 
-[![Platforms](https://img.shields.io/badge/platforms-Linux%20%7C%20macOS%20%7C%20Windows-blue)](https://github.com/yourusername/livecli)
-[![Architectures](https://img.shields.io/badge/architectures-amd64%20%7C%20arm64-green)](https://github.com/yourusername/livecli)
+[![Platforms](https://img.shields.io/badge/platforms-Linux%20%7C%20macOS%20%7C%20Windows-blue)](https://github.com/mohd-aquib-razi-7853/livecli)
+[![Architectures](https://img.shields.io/badge/architectures-amd64%20%7C%20arm64-green)](https://github.com/mohd-aquib-razi-7853/livecli)
 
 LiveCLI supports **Linux**, **macOS**, and **Windows** on both **x86_64** and **ARM64** architectures.
 
@@ -27,19 +27,19 @@ LiveCLI supports **Linux**, **macOS**, and **Windows** on both **x86_64** and **
 
 ```bash
 # Using installation script
-curl -fsSL https://raw.githubusercontent.com/yourusername/livecli/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/mohd-aquib-razi-7853/livecli/main/install.sh | bash
 ```
 
 #### Windows
 
 ```powershell
 # Using PowerShell (run as Administrator recommended)
-iwr -useb https://raw.githubusercontent.com/yourusername/livecli/main/install.ps1 | iex
+iwr -useb https://raw.githubusercontent.com/mohd-aquib-razi-7853/livecli/main/install.ps1 | iex
 ```
 
 ### Download Pre-built Binaries
 
-Download the latest release for your platform from [Releases](https://github.com/yourusername/livecli/releases):
+Download the latest release for your platform from [Releases](https://github.com/mohd-aquib-razi-7853/livecli/releases):
 
 - **Linux**: `livecli-linux-amd64`, `livecli-linux-arm64`
 - **macOS**: `livecli-darwin-amd64` (Intel), `livecli-darwin-arm64` (Apple Silicon)
@@ -49,7 +49,7 @@ Download the latest release for your platform from [Releases](https://github.com
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/livecli.git
+git clone https://github.com/mohd-aquib-razi-7853/livecli.git
 cd livecli
 
 # Download dependencies

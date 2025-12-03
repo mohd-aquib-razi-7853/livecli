@@ -1,7 +1,7 @@
 # LiveCLI Installation Script for Windows
 # Usage: 
 #   PowerShell -ExecutionPolicy Bypass -File install.ps1
-#   Or: iwr -useb https://raw.githubusercontent.com/yourusername/livecli/main/install.ps1 | iex
+#   Or: iwr -useb https://raw.githubusercontent.com/mohd-aquib-razi-7853/livecli/main/install.ps1 | iex
 
 param(
     [string]$InstallDir = "$env:LOCALAPPDATA\Programs\livecli",
@@ -11,7 +11,7 @@ param(
 $ErrorActionPreference = "Stop"
 
 $BinaryName = "livecli.exe"
-$RepoUrl = "https://github.com/yourusername/livecli" # Update with your actual repo
+$RepoUrl = "https://github.com/mohd-aquib-razi-7853/livecli" # Update with your actual repo
 
 # Colors for output
 function Write-ColorOutput {

@@ -254,7 +254,7 @@ All binaries have been successfully built! ✓
 **Linux (Ubuntu/Debian):**
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/yourusername/livecli/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/mohd-aquib-razi-7853/livecli/main/install.sh | bash
 export OPENAI_API_KEY='your-key'
 livecli setup "docker"
 ```
@@ -262,7 +262,7 @@ livecli setup "docker"
 **macOS:**
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/yourusername/livecli/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/mohd-aquib-razi-7853/livecli/main/install.sh | bash
 export OPENAI_API_KEY='your-key'
 livecli setup "homebrew"
 ```
@@ -270,7 +270,7 @@ livecli setup "homebrew"
 **Windows:**
 
 ```powershell
-iwr -useb https://raw.githubusercontent.com/yourusername/livecli/main/install.ps1 | iex
+iwr -useb https://raw.githubusercontent.com/mohd-aquib-razi-7853/livecli/main/install.ps1 | iex
 $env:OPENAI_API_KEY = "your-key"
 livecli setup "chocolatey"
 ```

@@ -23,20 +23,20 @@ Complete installation instructions for **Linux**, **macOS**, and **Windows**.
 
 ```bash
 # Using the installation script (recommended)
-curl -fsSL https://raw.githubusercontent.com/yourusername/livecli/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/mohd-aquib-razi-7853/livecli/main/install.sh | bash
 
 # OR using wget
-wget -qO- https://raw.githubusercontent.com/yourusername/livecli/main/install.sh | bash
+wget -qO- https://raw.githubusercontent.com/mohd-aquib-razi-7853/livecli/main/install.sh | bash
 ```
 
 ### Windows
 
 ```powershell
 # Using PowerShell (run as Administrator recommended)
-iwr -useb https://raw.githubusercontent.com/yourusername/livecli/main/install.ps1 | iex
+iwr -useb https://raw.githubusercontent.com/mohd-aquib-razi-7853/livecli/main/install.ps1 | iex
 
 # OR download and run the script
-Invoke-WebRequest -Uri "https://raw.githubusercontent.com/yourusername/livecli/main/install.ps1" -OutFile "install.ps1"
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/mohd-aquib-razi-7853/livecli/main/install.ps1" -OutFile "install.ps1"
 PowerShell -ExecutionPolicy Bypass -File install.ps1
 ```
 
@@ -52,10 +52,10 @@ PowerShell -ExecutionPolicy Bypass -File install.ps1
 
    ```bash
    # For x86_64 (most common)
-   wget https://github.com/yourusername/livecli/releases/latest/download/livecli-linux-amd64
+   wget https://github.com/mohd-aquib-razi-7853/livecli/releases/latest/download/livecli-linux-amd64
 
    # For ARM64 (e.g., Raspberry Pi, AWS Graviton)
-   wget https://github.com/yourusername/livecli/releases/latest/download/livecli-linux-arm64
+   wget https://github.com/mohd-aquib-razi-7853/livecli/releases/latest/download/livecli-linux-arm64
    ```
 
 2. **Make it executable:**
@@ -109,10 +109,10 @@ PowerShell -ExecutionPolicy Bypass -File install.ps1
 
    ```bash
    # For Intel Macs
-   curl -LO https://github.com/yourusername/livecli/releases/latest/download/livecli-darwin-amd64
+   curl -LO https://github.com/mohd-aquib-razi-7853/livecli/releases/latest/download/livecli-darwin-amd64
 
    # For Apple Silicon (M1/M2/M3)
-   curl -LO https://github.com/yourusername/livecli/releases/latest/download/livecli-darwin-arm64
+   curl -LO https://github.com/mohd-aquib-razi-7853/livecli/releases/latest/download/livecli-darwin-arm64
    ```
 
 2. **Make it executable:**
@@ -143,7 +143,7 @@ PowerShell -ExecutionPolicy Bypass -File install.ps1
 
 ```bash
 # Coming soon - Homebrew formula
-# brew tap yourusername/livecli
+# brew tap mohd-aquib-razi-7853/livecli
 # brew install livecli
 ```
 
@@ -155,8 +155,8 @@ PowerShell -ExecutionPolicy Bypass -File install.ps1
 
 1. **Download the appropriate binary:**
 
-   - **x86_64**: [livecli-windows-amd64.exe](https://github.com/yourusername/livecli/releases/latest/download/livecli-windows-amd64.exe)
-   - **ARM64**: [livecli-windows-arm64.exe](https://github.com/yourusername/livecli/releases/latest/download/livecli-windows-arm64.exe)
+   - **x86_64**: [livecli-windows-amd64.exe](https://github.com/mohd-aquib-razi-7853/livecli/releases/latest/download/livecli-windows-amd64.exe)
+   - **ARM64**: [livecli-windows-arm64.exe](https://github.com/mohd-aquib-razi-7853/livecli/releases/latest/download/livecli-windows-arm64.exe)
 
 2. **Create installation directory:**
 
@@ -196,7 +196,7 @@ PowerShell -ExecutionPolicy Bypass -File install.ps1
 
 ```powershell
 # Coming soon - Scoop package
-# scoop bucket add yourusername https://github.com/yourusername/scoop-bucket
+# scoop bucket add mohd-aquib-razi-7853 https://github.com/mohd-aquib-razi-7853/scoop-bucket
 # scoop install livecli
 ```
 
@@ -215,7 +215,7 @@ PowerShell -ExecutionPolicy Bypass -File install.ps1
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/yourusername/livecli.git
+   git clone https://github.com/mohd-aquib-razi-7853/livecli.git
    cd livecli
    ```
 
@@ -412,10 +412,10 @@ Simply run the installation script again - it will overwrite the old version:
 
 ```bash
 # Linux/macOS
-curl -fsSL https://raw.githubusercontent.com/yourusername/livecli/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/mohd-aquib-razi-7853/livecli/main/install.sh | bash
 
 # Windows
-iwr -useb https://raw.githubusercontent.com/yourusername/livecli/main/install.ps1 | iex
+iwr -useb https://raw.githubusercontent.com/mohd-aquib-razi-7853/livecli/main/install.ps1 | iex
 ```
 
 ### Manual Upgrade
@@ -448,8 +448,8 @@ $newPath = ($path.Split(';') | Where-Object { $_ -ne "$env:LOCALAPPDATA\Programs
 
 ## Support
 
-- **Issues**: [GitHub Issues](https://github.com/yourusername/livecli/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/yourusername/livecli/discussions)
+- **Issues**: [GitHub Issues](https://github.com/mohd-aquib-razi-7853/livecli/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/mohd-aquib-razi-7853/livecli/discussions)
 - **Documentation**: [README.md](README.md)
 
 ---

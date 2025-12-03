@@ -69,7 +69,7 @@ This will create binaries in the `build/` directory:
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/yourusername/livecli.git
+git clone https://github.com/mohd-aquib-razi-7853/livecli.git
 cd livecli
 
 # 2. Install dependencies
@@ -134,20 +134,20 @@ git push origin v1.0.0
 
 1. Push a tag: `git tag v1.0.0 && git push origin v1.0.0`
 2. Binaries are automatically built and attached to the release
-3. Users download from: `https://github.com/yourusername/livecli/releases`
+3. Users download from: `https://github.com/mohd-aquib-razi-7853/livecli/releases`
 
 ### 2. Installation Scripts
 
 **For Linux/macOS:**
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/yourusername/livecli/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/mohd-aquib-razi-7853/livecli/main/install.sh | bash
 ```
 
 **For Windows:**
 
 ```powershell
-iwr -useb https://raw.githubusercontent.com/yourusername/livecli/main/install.ps1 | iex
+iwr -useb https://raw.githubusercontent.com/mohd-aquib-razi-7853/livecli/main/install.ps1 | iex
 ```
 
 ### 3. Package Managers (Future)
@@ -158,25 +158,25 @@ iwr -useb https://raw.githubusercontent.com/yourusername/livecli/main/install.ps
 # Formula: homebrew-tap/livecli.rb
 class Livecli < Formula
   desc "AI-powered command-line interface"
-  homepage "https://github.com/yourusername/livecli"
+  homepage "https://github.com/mohd-aquib-razi-7853/livecli"
   version "1.0.0"
 
   on_macos do
     if Hardware::CPU.arm?
-      url "https://github.com/yourusername/livecli/releases/download/v1.0.0/livecli-darwin-arm64"
+      url "https://github.com/mohd-aquib-razi-7853/livecli/releases/download/v1.0.0/livecli-darwin-arm64"
       sha256 "..."
     else
-      url "https://github.com/yourusername/livecli/releases/download/v1.0.0/livecli-darwin-amd64"
+      url "https://github.com/mohd-aquib-razi-7853/livecli/releases/download/v1.0.0/livecli-darwin-amd64"
       sha256 "..."
     end
   end
 
   on_linux do
     if Hardware::CPU.arm?
-      url "https://github.com/yourusername/livecli/releases/download/v1.0.0/livecli-linux-arm64"
+      url "https://github.com/mohd-aquib-razi-7853/livecli/releases/download/v1.0.0/livecli-linux-arm64"
       sha256 "..."
     else
-      url "https://github.com/yourusername/livecli/releases/download/v1.0.0/livecli-linux-amd64"
+      url "https://github.com/mohd-aquib-razi-7853/livecli/releases/download/v1.0.0/livecli-linux-amd64"
       sha256 "..."
     end
   end
@@ -446,6 +446,6 @@ When adding platform-specific code:
 
 ## Support
 
-**Issues:** [GitHub Issues](https://github.com/yourusername/livecli/issues)
+**Issues:** [GitHub Issues](https://github.com/mohd-aquib-razi-7853/livecli/issues)
 
-**Discussions:** [GitHub Discussions](https://github.com/yourusername/livecli/discussions)
+**Discussions:** [GitHub Discussions](https://github.com/mohd-aquib-razi-7853/livecli/discussions)

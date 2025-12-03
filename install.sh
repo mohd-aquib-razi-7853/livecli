@@ -1,13 +1,13 @@
 #!/bin/bash
 
 # LiveCLI Installation Script for Linux & macOS
-# Usage: curl -fsSL https://raw.githubusercontent.com/yourusername/livecli/main/install.sh | bash
+# Usage: curl -fsSL https://raw.githubusercontent.com/mohd-aquib-razi-7853/livecli/main/install.sh | bash
 
 set -e
 
 BINARY_NAME="livecli"
 INSTALL_DIR="/usr/local/bin"
-REPO_URL="https://github.com/yourusername/livecli"  # Update with your actual repo
+REPO_URL="https://github.com/mohd-aquib-razi-7853/livecli"  # Update with your actual repo
 VERSION="latest"
 
 # Colors
