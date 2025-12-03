@@ -56,13 +56,13 @@ cd livecli
 go mod download
 
 # Build for current platform
-make build
+go build
 
 # OR build for all platforms (Linux, macOS, Windows - amd64 & arm64)
-make build-all
+go build-all
 
 # Install globally (Linux/macOS)
-make install
+go install
 
 # Windows: move binary to a directory in your PATH
 copy build\livecli-windows-amd64.exe %LOCALAPPDATA%\Programs\livecli\livecli.exe
