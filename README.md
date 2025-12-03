@@ -65,6 +65,7 @@ make build-all
 make install
 
 # Windows: move binary to a directory in your PATH
+copy build\livecli-windows-amd64.exe %LOCALAPPDATA%\Programs\livecli\livecli.exe
 ```
 
 ### Prerequisites
