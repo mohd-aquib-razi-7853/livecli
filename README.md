@@ -16,27 +16,64 @@ A powerful AI-powered command-line interface that combines system command execut
 
 ## Installation 📦
 
-### Prerequisites
+[![Platforms](https://img.shields.io/badge/platforms-Linux%20%7C%20macOS%20%7C%20Windows-blue)](https://github.com/yourusername/livecli)
+[![Architectures](https://img.shields.io/badge/architectures-amd64%20%7C%20arm64-green)](https://github.com/yourusername/livecli)
 
-- Go 1.21 or higher
-- OpenAI API key
+LiveCLI supports **Linux**, **macOS**, and **Windows** on both **x86_64** and **ARM64** architectures.
+
+### Quick Install
+
+#### Linux & macOS
+
+```bash
+# Using installation script
+curl -fsSL https://raw.githubusercontent.com/yourusername/livecli/main/install.sh | bash
+```
+
+#### Windows
+
+```powershell
+# Using PowerShell (run as Administrator recommended)
+iwr -useb https://raw.githubusercontent.com/yourusername/livecli/main/install.ps1 | iex
+```
+
+### Download Pre-built Binaries
+
+Download the latest release for your platform from [Releases](https://github.com/yourusername/livecli/releases):
+
+- **Linux**: `livecli-linux-amd64`, `livecli-linux-arm64`
+- **macOS**: `livecli-darwin-amd64` (Intel), `livecli-darwin-arm64` (Apple Silicon)
+- **Windows**: `livecli-windows-amd64.exe`, `livecli-windows-arm64.exe`
 
 ### Build from Source
 
 ```bash
 # Clone the repository
-git clone https://github.com/mrazi/livecli.git
+git clone https://github.com/yourusername/livecli.git
 cd livecli
 
 # Download dependencies
 go mod download
 
-# Build the binary
-go build -o livecli
+# Build for current platform
+make build
 
-# Optional: Install globally
-sudo mv livecli /usr/local/bin/
+# OR build for all platforms (Linux, macOS, Windows - amd64 & arm64)
+make build-all
+
+# Install globally (Linux/macOS)
+make install
+
+# Windows: move binary to a directory in your PATH
 ```
+
+### Prerequisites
+
+- **For pre-built binaries**: None! Just download and run
+- **For building from source**: Go 1.21 or higher
+- **For all users**: OpenAI API key ([Get one here](https://platform.openai.com/api-keys))
+
+📖 **Detailed installation instructions**: See [INSTALL.md](INSTALL.md) for platform-specific guides and troubleshooting.
 
 ## Configuration ⚙️
 

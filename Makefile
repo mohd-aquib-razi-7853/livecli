@@ -42,14 +42,26 @@ deps: ## Download dependencies
 	@go mod tidy
 	@echo "Dependencies updated"
 
-build-all: ## Build for all platforms
+build-all: ## Build for all platforms (Linux, macOS, Windows - amd64 & arm64)
 	@echo "Building for multiple platforms..."
 	@mkdir -p $(BUILD_DIR)
-	@GOOS=linux GOARCH=amd64 go build -o $(BUILD_DIR)/$(BINARY_NAME)-linux-amd64 main.go
-	@GOOS=darwin GOARCH=amd64 go build -o $(BUILD_DIR)/$(BINARY_NAME)-darwin-amd64 main.go
-	@GOOS=darwin GOARCH=arm64 go build -o $(BUILD_DIR)/$(BINARY_NAME)-darwin-arm64 main.go
-	@GOOS=windows GOARCH=amd64 go build -o $(BUILD_DIR)/$(BINARY_NAME)-windows-amd64.exe main.go
-	@echo "Multi-platform build complete in $(BUILD_DIR)/"
+	@echo "→ Building for Linux (amd64)..."
+	@GOOS=linux GOARCH=amd64 go build -ldflags="-s -w" -o $(BUILD_DIR)/$(BINARY_NAME)-linux-amd64 main.go
+	@echo "→ Building for Linux (arm64)..."
+	@GOOS=linux GOARCH=arm64 go build -ldflags="-s -w" -o $(BUILD_DIR)/$(BINARY_NAME)-linux-arm64 main.go
+	@echo "→ Building for macOS (amd64 - Intel)..."
+	@GOOS=darwin GOARCH=amd64 go build -ldflags="-s -w" -o $(BUILD_DIR)/$(BINARY_NAME)-darwin-amd64 main.go
+	@echo "→ Building for macOS (arm64 - Apple Silicon)..."
+	@GOOS=darwin GOARCH=arm64 go build -ldflags="-s -w" -o $(BUILD_DIR)/$(BINARY_NAME)-darwin-arm64 main.go
+	@echo "→ Building for Windows (amd64)..."
+	@GOOS=windows GOARCH=amd64 go build -ldflags="-s -w" -o $(BUILD_DIR)/$(BINARY_NAME)-windows-amd64.exe main.go
+	@echo "→ Building for Windows (arm64)..."
+	@GOOS=windows GOARCH=arm64 go build -ldflags="-s -w" -o $(BUILD_DIR)/$(BINARY_NAME)-windows-arm64.exe main.go
+	@echo "✓ Multi-platform build complete in $(BUILD_DIR)/"
+	@echo ""
+	@echo "Generating checksums..."
+	@cd $(BUILD_DIR) && sha256sum * > checksums.txt 2>/dev/null || shasum -a 256 * > checksums.txt
+	@echo "✓ Checksums saved to $(BUILD_DIR)/checksums.txt"
 
 dev: ## Run in development mode with hot reload (requires air)
 	@if command -v air > /dev/null; then \
