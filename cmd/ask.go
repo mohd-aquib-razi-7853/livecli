@@ -6,9 +6,8 @@ import (
 	"strings"
 
 	"github.com/fatih/color"
-	"github.com/google/generative-ai-go/genai"
+	openai "github.com/sashabaranov/go-openai"
 	"github.com/spf13/cobra"
-	"google.golang.org/api/option"
 )
 
 var askCmd = &cobra.Command{
@@ -32,7 +31,7 @@ func init() {
 
 func askQuestion(question string) {
 	if apiKey == "" {
-		color.Red("Error: Gemini API key not set. Use --api-key flag or set GEMINI_API_KEY environment variable.")
+		color.Red("Error: OpenAI API key not set. Use --api-key flag or set OPENAI_API_KEY environment variable.")
 		return
 	}
 	
@@ -42,38 +41,37 @@ func askQuestion(question string) {
 	cyan.Printf("\n❓ Question: %s\n\n", question)
 	
 	ctx := context.Background()
-	client, err := genai.NewClient(ctx, option.WithAPIKey(apiKey))
-	if err != nil {
-		color.Red("Error creating Gemini client: %v\n", err)
-		return
-	}
-	defer client.Close()
+	client := openai.NewClient(apiKey)
 
-	geminiModel := client.GenerativeModel(model)
-	geminiModel.SetTemperature(float32(temperature))
-	geminiModel.SetMaxOutputTokens(int32(maxTokens))
-	geminiModel.SystemInstruction = &genai.Content{
-		Parts: []genai.Part{genai.Text("You are a helpful AI assistant specialized in programming, system administration, and command-line tools. Provide concise and accurate answers.")},
-	}
-
-	resp, err := geminiModel.GenerateContent(ctx, genai.Text(question))
+	resp, err := client.CreateChatCompletion(
+		ctx,
+		openai.ChatCompletionRequest{
+			Model: model,
+			Messages: []openai.ChatCompletionMessage{
+				{
+					Role:    openai.ChatMessageRoleSystem,
+					Content: "You are a helpful AI assistant specialized in programming, system administration, and command-line tools. Provide concise and accurate answers.",
+				},
+				{
+					Role:    openai.ChatMessageRoleUser,
+					Content: question,
+				},
+			},
+			Temperature: float32(temperature),
+			MaxTokens:   maxTokens,
+		},
+	)
 	if err != nil {
 		color.Red("Error: %v\n", err)
 		return
 	}
 	
-	if len(resp.Candidates) == 0 || len(resp.Candidates[0].Content.Parts) == 0 {
+	if len(resp.Choices) == 0 {
 		color.Red("Error: No response from AI\n")
 		return
 	}
 	
 	green.Println("💡 Answer:")
-	
-	// Extract text from the response
-	for _, part := range resp.Candidates[0].Content.Parts {
-		if txt, ok := part.(genai.Text); ok {
-			fmt.Println(string(txt))
-		}
-	}
+	fmt.Println(resp.Choices[0].Message.Content)
 	fmt.Println()
 }

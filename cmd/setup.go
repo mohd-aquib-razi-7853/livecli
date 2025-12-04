@@ -10,9 +10,8 @@ import (
 	"strings"
 
 	"github.com/fatih/color"
-	"github.com/google/generative-ai-go/genai"
+	openai "github.com/sashabaranov/go-openai"
 	"github.com/spf13/cobra"
-	"google.golang.org/api/option"
 )
 
 type SetupStep struct {
@@ -59,7 +58,7 @@ func init() {
 
 func executeSetup(task string) {
 	if apiKey == "" {
-		color.Red("Error: Gemini API key not set. Use --api-key flag or set GEMINI_API_KEY environment variable.")
+		color.Red("Error: OpenAI API key not set. Use --api-key flag or set OPENAI_API_KEY environment variable.")
 		return
 	}
 	
@@ -175,11 +174,7 @@ func executeSetup(task string) {
 
 func generateSetupPlan(task string) (SetupPlan, error) {
 	ctx := context.Background()
-	client, err := genai.NewClient(ctx, option.WithAPIKey(apiKey))
-	if err != nil {
-		return SetupPlan{}, fmt.Errorf("failed to create Gemini client: %w", err)
-	}
-	defer client.Close()
+	client := openai.NewClient(apiKey)
 	
 	// Detect OS
 	osInfo := detectOS()
@@ -222,30 +217,33 @@ Example for "install docker":
   ]
 }`, osInfo, task)
 
-	geminiModel := client.GenerativeModel(model)
-	geminiModel.SetTemperature(0.3) // Lower temperature for more consistent output
-	geminiModel.SetMaxOutputTokens(2000)
-	geminiModel.SystemInstruction = &genai.Content{
-		Parts: []genai.Part{genai.Text(systemPrompt)},
-	}
-	
-	prompt := fmt.Sprintf("Generate setup commands for: %s", task)
-	resp, err := geminiModel.GenerateContent(ctx, genai.Text(prompt))
+	resp, err := client.CreateChatCompletion(
+		ctx,
+		openai.ChatCompletionRequest{
+			Model: model,
+			Messages: []openai.ChatCompletionMessage{
+				{
+					Role:    openai.ChatMessageRoleSystem,
+					Content: systemPrompt,
+				},
+				{
+					Role:    openai.ChatMessageRoleUser,
+					Content: fmt.Sprintf("Generate setup commands for: %s", task),
+				},
+			},
+			Temperature: 0.3, // Lower temperature for more consistent output
+			MaxTokens:   2000,
+		},
+	)
 	if err != nil {
 		return SetupPlan{}, fmt.Errorf("AI request failed: %w", err)
 	}
 	
-	if len(resp.Candidates) == 0 || len(resp.Candidates[0].Content.Parts) == 0 {
+	if len(resp.Choices) == 0 {
 		return SetupPlan{}, fmt.Errorf("no response from AI")
 	}
 	
-	// Extract text from response
-	var content string
-	for _, part := range resp.Candidates[0].Content.Parts {
-		if txt, ok := part.(genai.Text); ok {
-			content += string(txt)
-		}
-	}
+	content := resp.Choices[0].Message.Content
 	
 	// Clean up the response (remove markdown code blocks if present)
 	content = strings.TrimSpace(content)

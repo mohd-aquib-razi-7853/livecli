@@ -7,9 +7,8 @@ import (
 
 	"github.com/chzyer/readline"
 	"github.com/fatih/color"
-	"github.com/google/generative-ai-go/genai"
+	openai "github.com/sashabaranov/go-openai"
 	"github.com/spf13/cobra"
-	"google.golang.org/api/option"
 )
 
 var interactiveCmd = &cobra.Command{
@@ -37,26 +36,20 @@ func init() {
 
 func startInteractiveMode() {
 	if apiKey == "" {
-		color.Red("Error: Gemini API key not set. Use --api-key flag or set GEMINI_API_KEY environment variable.")
+		color.Red("Error: OpenAI API key not set. Use --api-key flag or set OPENAI_API_KEY environment variable.")
 		return
 	}
 	
 	ctx := context.Background()
-	client, err := genai.NewClient(ctx, option.WithAPIKey(apiKey))
-	if err != nil {
-		color.Red("Error creating Gemini client: %v", err)
-		return
-	}
-	defer client.Close()
+	client := openai.NewClient(apiKey)
 
-	geminiModel := client.GenerativeModel(model)
-	geminiModel.SetTemperature(float32(temperature))
-	geminiModel.SetMaxOutputTokens(int32(maxTokens))
-	geminiModel.SystemInstruction = &genai.Content{
-		Parts: []genai.Part{genai.Text(systemPrompt)},
+	// Maintain conversation history
+	messages := []openai.ChatCompletionMessage{
+		{
+			Role:    openai.ChatMessageRoleSystem,
+			Content: systemPrompt,
+		},
 	}
-
-	chatSession := geminiModel.StartChat()
 	
 	cyan := color.New(color.FgCyan, color.Bold)
 	green := color.New(color.FgGreen, color.Bold)
@@ -103,7 +96,12 @@ func startInteractiveMode() {
 		
 		// Handle clear
 		if input == "/clear" {
-			chatSession = geminiModel.StartChat()
+			messages = []openai.ChatCompletionMessage{
+				{
+					Role:    openai.ChatMessageRoleSystem,
+					Content: systemPrompt,
+				},
+			}
 			green.Println("✓ Chat history cleared")
 			continue
 		}
@@ -125,12 +123,26 @@ func startInteractiveMode() {
 		// Handle AI chat
 		magenta.Printf("\nYou: %s\n", input)
 		
+		// Add user message to history
+		messages = append(messages, openai.ChatCompletionMessage{
+			Role:    openai.ChatMessageRoleUser,
+			Content: input,
+		})
+		
 		fmt.Print("AI> ")
-		response, err := getGeminiResponse(ctx, chatSession, input)
+		response, err := getOpenAIResponse(ctx, client, messages)
 		if err != nil {
 			color.Red("Error: %v\n", err)
+			// Remove the last user message if there was an error
+			messages = messages[:len(messages)-1]
 			continue
 		}
+		
+		// Add assistant response to history
+		messages = append(messages, openai.ChatCompletionMessage{
+			Role:    openai.ChatMessageRoleAssistant,
+			Content: response,
+		})
 		
 		fmt.Println(response)
 		fmt.Println()

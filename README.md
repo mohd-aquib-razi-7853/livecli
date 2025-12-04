@@ -42,19 +42,19 @@ livecli
 ### Prerequisites
 
 - **For building from source**: Go 1.21 or higher (https://go.dev/doc/install)
-- **For all users**: Google Gemini API key ([Get one here](https://makersuite.google.com/app/apikey))
+- **For all users**: OpenAI API key ([Get one here](https://platform.openai.com/api-keys))
 
 
 ## Configuration ⚙️
 
-### Set your Gemini API Key
+### Set your OpenAI API Key
 
 You can set your API key in three ways:
 
 1. **Environment Variable** (recommended):
 
 ```bash
-export GEMINI_API_KEY="your-api-key-here"
+export OPENAI_API_KEY="your-api-key-here"
 ```
 
 2. **Command-line Flag**:
@@ -178,7 +178,7 @@ livecli git "fix: typo in readme" --yes
 livecli chat
 
 # Use custom model
-livecli chat --model gemini-1.5-pro
+livecli chat --model gpt-4o
 
 # Adjust temperature and max tokens
 livecli chat --temperature 0.9 --max-tokens 2000
@@ -255,7 +255,7 @@ $ livecli chat
 ╚═══════════════════════════════════════════════════════════╝
 
 Commands: /clear (clear history), /exit or Ctrl+C (quit)
-Model: gemini-2.5-flash
+Model: gpt-4o-mini
 
 You> How do I find all files larger than 100MB?
 
@@ -314,8 +314,8 @@ AI> Of course! Here are more advanced techniques:
 
 ### Global Flags
 
-- `--api-key`: Gemini API key
-- `--model, -m`: AI model to use (default: gemini-2.5-flash)
+- `--api-key`: OpenAI API key
+- `--model, -m`: AI model to use (default: gpt-4o-mini)
 
 ### exec Command
 
@@ -421,7 +421,7 @@ go test -cover ./...
 ## Technologies Used 🔧
 
 - **[Cobra](https://github.com/spf13/cobra)**: CLI framework
-- **[generative-ai-go](https://github.com/google/generative-ai-go)**: Google Gemini API client
+- **[go-openai](https://github.com/sashabaranov/go-openai)**: OpenAI API client
 - **[color](https://github.com/fatih/color)**: Colorized terminal output
 - **[readline](https://github.com/chzyer/readline)**: Interactive input with history
 
@@ -445,7 +445,7 @@ If you have questions or need help:
 
 - [ ] Add command suggestions based on AI analysis
 - [ ] Save conversation history to file
-- [x] Support for multiple AI providers (Gemini)
+- [x] Support for multiple AI providers (OpenAI)
 - [ ] Plugin system for custom commands
 - [ ] Auto-completion for commands
 - [ ] Web UI for chat interface
