@@ -35,7 +35,7 @@ go build
 # Install globally (Linux/macOS)
 go install
 
-# Execute 
+# Execute
 livecli
 ```
 
@@ -43,7 +43,6 @@ livecli
 
 - **For building from source**: Go 1.21 or higher (https://go.dev/doc/install)
 - **For all users**: OpenAI API key ([Get one here](https://platform.openai.com/api-keys))
-
 
 ## Configuration ⚙️
 
@@ -77,19 +76,6 @@ cp .env.example .env
 ```bash
 livecli
 livecli --help
-```
-
-### Execute System Commands
-
-```bash
-# Execute a simple command
-livecli exec "ls -la"
-
-# Execute with custom shell
-livecli exec --shell bash "echo Hello World"
-
-# Execute in specific directory
-livecli exec --dir /tmp "pwd"
 ```
 
 ### AI-Powered Setup Assistant 🤖 (NEW!)

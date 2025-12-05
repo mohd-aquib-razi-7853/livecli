@@ -51,45 +51,49 @@ Examples:
 
 func init() {
 	rootCmd.AddCommand(setupCmd)
-	
+
 	setupCmd.Flags().BoolVarP(&autoConfirm, "yes", "y", false, "Auto-confirm all commands")
 	setupCmd.Flags().BoolVar(&dryRun, "dry-run", false, "Show commands without executing")
 }
 
 func executeSetup(task string) {
 	if apiKey == "" {
-		color.Red("Error: OpenAI API key not set. Use --api-key flag or set OPENAI_API_KEY environment variable.")
+		color.Red(
+			"Error: OpenAI API key not set. Use --api-key flag or set OPENAI_API_KEY environment variable.",
+		)
 		return
 	}
-	
+
 	cyan := color.New(color.FgCyan, color.Bold)
 	green := color.New(color.FgGreen, color.Bold)
 	yellow := color.New(color.FgYellow, color.Bold)
 	magenta := color.New(color.FgMagenta, color.Bold)
-	
+
 	cyan.Println("\n╔═══════════════════════════════════════════════════════════╗")
 	cyan.Println("║           🤖 AI Setup Assistant                           ║")
 	cyan.Println("╚═══════════════════════════════════════════════════════════╝")
-	
+
 	fmt.Printf("\n📋 Task: %s\n", task)
 	yellow.Println("\n⏳ Analyzing your request and generating setup plan...")
-	
+
 	// Get setup plan from AI
 	plan, err := generateSetupPlan(task)
 	if err != nil {
 		color.Red("\n❌ Error generating setup plan: %v", err)
 		return
 	}
-	
+
 	if len(plan.Steps) == 0 {
-		color.Yellow("\n⚠️  No setup steps were generated. The task might already be complete or unclear.")
+		color.Yellow(
+			"\n⚠️  No setup steps were generated. The task might already be complete or unclear.",
+		)
 		return
 	}
-	
+
 	// Display the plan
 	cyan.Println("\n📝 Setup Plan:")
 	cyan.Println("─────────────────────────────────────────────────────────────")
-	
+
 	for i, step := range plan.Steps {
 		if step.Optional {
 			yellow.Printf("\n%d. [OPTIONAL] %s\n", i+1, step.Description)
@@ -98,38 +102,38 @@ func executeSetup(task string) {
 		}
 		magenta.Printf("   Command: %s\n", step.Command)
 	}
-	
+
 	cyan.Println("\n─────────────────────────────────────────────────────────────")
-	
+
 	// Ask for overall confirmation
 	if !autoConfirm && !dryRun {
 		fmt.Print("\n❓ Do you want to proceed with this setup plan? (yes/no): ")
 		reader := bufio.NewReader(os.Stdin)
 		response, _ := reader.ReadString('\n')
 		response = strings.TrimSpace(strings.ToLower(response))
-		
+
 		if response != "yes" && response != "y" {
 			yellow.Println("\n❌ Setup cancelled by user.")
 			return
 		}
 	}
-	
+
 	if dryRun {
 		green.Println("\n✓ Dry run complete. No commands were executed.")
 		return
 	}
-	
+
 	// Execute each step
 	green.Println("\n\n🚀 Starting setup process...")
-	
+
 	for i, step := range plan.Steps {
 		cyan.Printf("\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n")
 		cyan.Printf("Step %d/%d\n", i+1, len(plan.Steps))
 		cyan.Println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
-		
+
 		fmt.Printf("\n📌 %s\n", step.Description)
 		magenta.Printf("💻 Command: %s\n", step.Command)
-		
+
 		// Ask for confirmation for each step
 		if !autoConfirm {
 			if step.Optional {
@@ -137,36 +141,30 @@ func executeSetup(task string) {
 			} else {
 				fmt.Print("\n❓ Execute this command? (yes/no/skip all): ")
 			}
-			
+
 			reader := bufio.NewReader(os.Stdin)
 			response, _ := reader.ReadString('\n')
 			response = strings.TrimSpace(strings.ToLower(response))
-			
+
 			if response == "no" || response == "n" {
 				yellow.Println("⏭️  Skipped by user")
 				continue
 			}
-			
+
 			if response == "skip all" || response == "skip" {
 				yellow.Println("\n⏭️  Skipping remaining steps")
 				break
 			}
 		}
-		
-		// Execute the command
-		green.Printf("\n▶ Executing...\n")
-		cyan.Println("─────────────────────────────────────────────────────────────")
-		
-		executeCommand(step.Command)
-		
+
 		green.Printf("\n✓ Step %d/%d completed\n", i+1, len(plan.Steps))
 	}
-	
+
 	// Final summary
 	cyan.Println("\n\n╔═══════════════════════════════════════════════════════════╗")
 	green.Println("║           ✅ Setup Complete!                              ║")
 	cyan.Println("╚═══════════════════════════════════════════════════════════╝")
-	
+
 	fmt.Printf("\n✓ Executed %d steps successfully\n", len(plan.Steps))
 	green.Println("\n💡 Tip: Verify the installation with relevant commands (e.g., version checks)")
 	fmt.Println()
@@ -175,11 +173,12 @@ func executeSetup(task string) {
 func generateSetupPlan(task string) (SetupPlan, error) {
 	ctx := context.Background()
 	client := openai.NewClient(apiKey)
-	
+
 	// Detect OS
 	osInfo := detectOS()
-	
-	systemPrompt := fmt.Sprintf(`You are an expert system administrator and DevOps engineer. Generate a precise, safe setup plan for the user's request.
+
+	systemPrompt := fmt.Sprintf(
+		`You are an expert system administrator and DevOps engineer. Generate a precise, safe setup plan for the user's request.
 
 Operating System: %s
 Task: %s
@@ -215,7 +214,10 @@ Example for "install docker":
     {"command": "sudo usermod -aG docker $USER", "description": "Add user to docker group", "optional": true},
     {"command": "docker --version", "description": "Verify Docker installation", "optional": false}
   ]
-}`, osInfo, task)
+}`,
+		osInfo,
+		task,
+	)
 
 	resp, err := client.CreateChatCompletion(
 		ctx,
@@ -238,20 +240,20 @@ Example for "install docker":
 	if err != nil {
 		return SetupPlan{}, fmt.Errorf("AI request failed: %w", err)
 	}
-	
+
 	if len(resp.Choices) == 0 {
 		return SetupPlan{}, fmt.Errorf("no response from AI")
 	}
-	
+
 	content := resp.Choices[0].Message.Content
-	
+
 	// Clean up the response (remove markdown code blocks if present)
 	content = strings.TrimSpace(content)
 	content = strings.TrimPrefix(content, "```json")
 	content = strings.TrimPrefix(content, "```")
 	content = strings.TrimSuffix(content, "```")
 	content = strings.TrimSpace(content)
-	
+
 	// Parse JSON response
 	var plan SetupPlan
 	if err := json.Unmarshal([]byte(content), &plan); err != nil {
@@ -259,7 +261,7 @@ Example for "install docker":
 		fmt.Printf("Debug - AI Response:\n%s\n", content)
 		return SetupPlan{}, fmt.Errorf("failed to parse AI response as JSON: %w", err)
 	}
-	
+
 	return plan, nil
 }
 
